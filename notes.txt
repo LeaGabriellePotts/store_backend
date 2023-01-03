@@ -1,0 +1,3 @@
+# activate the virtual env
+
+source venv/bin/activate
