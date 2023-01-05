@@ -32,6 +32,69 @@ def version():
 def get_catalog():
     return json.dumps(catalog)
 
+# get all products that belong to a category
+@app.get("/api/catalog/<category>")
+def get_by_category(category):
+    result = []
+    for prod in catalog:
+        if prod["category"].lower() == category.lower():
+            result.append(prod)
+
+    return json.dumps(result)
+
+@app.get("/api/catalog/search/<title>")
+def search_by_title(title):
+    #return all products whose title CONTAINS the title variable
+    result = []
+    for prod in catalog:
+        if title.lower() in prod["title"].lower():
+            result.append(prod)
+
+    return json.dumps(result)
+
+    #create an if statement to travel the catalog
+        #if product title contains title
+        #add the product to the list
+        #
+    #return the list as json
+
+
+# get /api/product/cheaper/1050
+# get /api/product/cheaper/999
+
+@app.get('/api/product/cheaper/<price>')
+def search_by_price(price):
+    result = []
+    for prod in catalog:
+        if prod["price"] < float(price):
+            result.append(prod)
+
+    return json.dumps(result)
+
+
+@app.get("/api/product/cheapest")
+def get_cheapest():
+    answer = catalog[0]
+    for prod in catalog:
+        if prod["price"] < answer["price"]:
+            answer = prod
+
+    return json.dumps(answer)
+
+
+
+
+# create a get endpoint that returns the number of products in the catalog 
+@app.get("/api/product/count")
+def count_products():
+    count = len(catalog)
+    return json.dumps(count)
+    #json.dumps(len(catalog))
+    
+
+
+
+
 @app.get('/test/numbers')
 def get_numbers():
     # create a list with numbers from 1 to 20
@@ -44,6 +107,6 @@ def get_numbers():
 
     return json.dumps(result)
 
-   
+
 
 app.run(debug=True)
