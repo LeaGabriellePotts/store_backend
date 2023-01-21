@@ -1,3 +1,18 @@
-# activate the virtual env
+open terminal then
+cd___folderdrag  (cd space and drag the folder here from finder)
 
+# activate the virtual env
 source venv/bin/activate
+
+#to start the project (this project is called server.py and you say "python3" to activate it in python)
+python3 server.py 
+
+#stop server 
+ctrl + c
+#deactivate the virtual env
+deactivate
+#push the changes
+git add .
+git commit -m "MESSAGE"
+git push
+
